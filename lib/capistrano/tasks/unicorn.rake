@@ -83,7 +83,7 @@ namespace :unicorn do
   task :upload_os_detection_script do
     on roles :app do
       execute :mkdir, '-p', "#{fetch(:tmp_dir)}/#{fetch(:application)}/"
-      upload! File.join(File.dirname(__FILE__), "../../scripts/#{fetch(:detect_os_script_name)}"), fetch(:detect_os_remote_script_path)
+      sudo_upload! File.join(File.dirname(__FILE__), "../../scripts/#{fetch(:detect_os_script_name)}"), fetch(:detect_os_remote_script_path)
       execute :chmod, '+x', fetch(:detect_os_remote_script_path)
     end
   end
