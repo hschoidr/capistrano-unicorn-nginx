@@ -76,7 +76,8 @@ namespace :unicorn do
           when 'centos'
             execute :sudo, :service, fetch(:unicorn_service), command
           when 'ubuntu'
-            execute :service, fetch(:unicorn_service), command
+            #execute :service, fetch(:unicorn_service), command
+            sudo 'service', fetch(:unicorn_service), command
         end
       end
     end
