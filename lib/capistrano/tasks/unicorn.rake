@@ -72,14 +72,13 @@ namespace :unicorn do
     desc "#{command} unicorn"
     task command do
       on roles :app do
-        sudo 'service', fetch(:unicorn_service), command
-        #case capture(fetch(:detect_os_remote_script_path)).downcase
-        #  when 'centos'
-        #    execute :sudo, :service, fetch(:unicorn_service), command
-        #  when 'ubuntu'
-        #    #execute :service, fetch(:unicorn_service), command
-        #    sudo 'service', fetch(:unicorn_service), command
-        #end
+        case capture(fetch(:detect_os_remote_script_path)).downcase
+          when 'centos'
+            execute :sudo, :service, fetch(:unicorn_service), command
+          when 'ubuntu'
+            #execute :service, fetch(:unicorn_service), command
+            sudo 'service', fetch(:unicorn_service), command
+        end
       end
     end
   end
